@@ -1,0 +1,1 @@
+Some secret message. It can't be detected if you don't know the algorithm.

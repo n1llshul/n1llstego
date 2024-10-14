@@ -103,7 +103,7 @@ encres Encode(unsigned long long int num, std::string input, int rem, int index)
 						coded = true;
 						//std::cout << "1" << std::endl;
 					}	
-					std::cout << conv_num[num_counter];
+					//std::cout << conv_num[num_counter];
 					num_counter++;
 					break;
 				}

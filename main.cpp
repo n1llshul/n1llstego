@@ -17,7 +17,7 @@ void mDec()
 	std::string msg = "";
 	std::string dec = Decode(ct);
 	//std::reverse(dec.begin(), dec.end());
-	std::cout << dec << std::endl;
+	//std::cout << dec << std::endl;
 	int dec_length = dec.size() / 64;
 	dec_length = dec.size() % 64 == 0 ? dec_length : dec_length + 1;
 	std::string decarr[dec_length];
@@ -71,7 +71,7 @@ int mEnc()
 		//std::cout << intToTxt(numarr[i]) << std::endl;
 	}
 	int pt_counter = 0;
-	std::cout << msg_length << std::endl;	
+	//std::cout << msg_length << std::endl;	
 	encres r;
 	r.result = "";
 	r.index = 0;

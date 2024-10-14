@@ -1,1 +1,1 @@
-Some secret message. It can't be detected if you don't know the algorithm.
+Some secret message. It can't be detected if you don't know the algorithm. Should I add any encryption in here? Or do I just leave it as it is, because it's just a stego experiment?

@@ -17,7 +17,7 @@ void mDec()
 	std::string msg = "";
 	std::string dec = Decode(ct);
 	//std::reverse(dec.begin(), dec.end());
-	//std::cout << dec << std::endl;
+	std::cout << dec << std::endl;
 	int dec_length = dec.size() / 64;
 	dec_length = dec.size() % 64 == 0 ? dec_length : dec_length + 1;
 	std::string decarr[dec_length];
@@ -64,14 +64,14 @@ int mEnc()
 	{
 		//std::cout << msgarr[i] << std::endl;
 		numarr[i] = txtToInt(msgarr[i]);
-		std::string str = std::bitset<64>(numarr[i]).to_string();
-		std::reverse(str.begin(), str.end());
+		//std::string str = std::bitset<64>(numarr[i]).to_string();
+		//std::reverse(str.begin(), str.end());
 		//std::cout << str << std::endl;
-		//std::cout << numarr[i] << std::endl;
+		///std::cout << numarr[i] << std::endl;
 		//std::cout << intToTxt(numarr[i]) << std::endl;
 	}
 	int pt_counter = 0;
-	
+	std::cout << msg_length << std::endl;	
 	encres r;
 	r.result = "";
 	r.index = 0;
@@ -84,20 +84,16 @@ int mEnc()
 			//std::cout << "remain " << r.remain << std::endl;
 			//std::cout << r.result << std::endl;
 			ct += r.result;
-			if(r.remain != -1)
-			{
 			
-				pt_counter++;
-			}
-			else
+			if(r.remain == -1)
 			{
 				i++;
 				r.remain = 64;
 				r = Encode(numarr[i], ptarr[pt_counter], r.remain, r.index);
 				ct += r.result;
-				pt_counter++;
 				//std::cout << r.result.size() << std::endl;
 			}
+			pt_counter++;
 			if(pt_counter == pt_length && numarr[i] != 0)
 			{
 

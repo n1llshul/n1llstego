@@ -65,6 +65,7 @@ encres Encode(unsigned long long int num, std::string input, int rem, int index)
 	conv_num = std::bitset<64>(num).to_string();
 	std::reverse(conv_num.begin(), conv_num.end());
 	//std::cout << "rem " << rem << std::endl;
+	//std::cout << conv_num << std::endl;
 	if(rem != -2 && rem != 64)
 	{
 		//std::cout << " erase" << std::endl;
@@ -77,11 +78,10 @@ encres Encode(unsigned long long int num, std::string input, int rem, int index)
 		//	return obj;
 		//}
 	}
-	else if(rem == -2)
+	else if(rem == -2 || rem == 64)
 	{
-		//std::cout << conv_num << std::endl;
+	//	std::cout << conv_num << std::endl;
 	}
-	//std::cout << conv_num << std::endl;
 	//std::cout << conv_num.size() << std::endl;
 	//std::cout << std::endl << input << std::endl;
 	length = input.size();
@@ -103,18 +103,18 @@ encres Encode(unsigned long long int num, std::string input, int rem, int index)
 						coded = true;
 						//std::cout << "1" << std::endl;
 					}	
-					//std::cout << conv_num[num_counter];
+					std::cout << conv_num[num_counter];
 					num_counter++;
 					break;
 				}
 			}
 			else
 			{
-				if(i != length-1)
-				{
+			//	if(i != length-1)
+			//	{
 					global_break = true;
 					break;
-				}
+			//	}
 			}
 			if(coded)
 			{
@@ -123,6 +123,8 @@ encres Encode(unsigned long long int num, std::string input, int rem, int index)
 		}
 		if(global_break)
 		{
+			obj.index = i;
+		//	std::cout << "GB" << std::endl;
 			break;
 		}
 		obj.result = coded ? obj.result : obj.result + input[i];
@@ -131,46 +133,41 @@ encres Encode(unsigned long long int num, std::string input, int rem, int index)
 	obj.remain = conv_num.size() - num_counter;
 		if(obj.remain == 0)
 	{
-		//std::cout << "Remainder = 0." << std::endl;
+	//	std::cout << "Remainder = 0." << std::endl;
 	}	
-	//std::cout << i << std::endl;
+//	std::cout << i << std::endl;
+//	std::cout << input << std::endl;
 	if(obj.remain == 0 && num_counter == conv_num.size() && global_break)
 	{
 		//std::cout << "Condition accepted" << std::endl;
 		bool hasLat = false;
 		for(int k = i; k < length; k++)
 		{
+			//std::cout << k << std::endl;
 			for(int j = 0; j < Table.size; j++)
 			{
 				if(input[k] == Table.lat[j])
 				{
 					//std::cout << input[i] << std::endl;
+					//std::cout << input[k] << std::endl;
 					hasLat = true;
 					break;
 				}
 			}
 			if(hasLat)
 			{
-				obj.index = k;
 				obj.remain = -1;
-				//std::cout << "Remainder minus one.\n";
+	//			std::cout << "Remainder minus one.\n";
 				
 				break;
 			}
-			else
-			{
-				obj.result += input[k];
-			}
-		}
-		if(not hasLat)
-		{
-			obj.index = 0;
 		}
 	}
 	else
 	{
 		obj.index = 0;	
-	}/*
+	}
+	/*
 	if(global_break && obj.remain != -1)
 	{
 		for(int j = i; j < length; j++)
@@ -179,9 +176,8 @@ encres Encode(unsigned long long int num, std::string input, int rem, int index)
 		}
 	}*/
 	//std::cout << num_counter << std::endl;
-	//std::cout << obj.remain << std::endl << std::endl;
+	//std::cout << obj.remain << std::endl;
 	//std::cout << "Endoding ended successfully.\n";
-	//std::cout << input << std::endl;
 	//std::cout << obj.result << std::endl << std::endl;
 	return obj;
 }
@@ -214,7 +210,7 @@ std::string Decode(std::string input)
 			{
 				decoded += '0';
 				zero_count++;
-				if(zero_count == 64)
+				if(zero_count >= 64 && decoded.size() % 64 == 0)
 				{
 					std::reverse(decoded.begin(), decoded.end());
 					decoded.erase(decoded.begin(), decoded.begin()+64);

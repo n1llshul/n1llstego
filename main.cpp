@@ -78,7 +78,7 @@ int mEnc()
 	for(int i = 0; i < msg_length; i++)
 	{
 		r.remain = -2;
-		while(r.remain != 0)
+		while(r.remain != 0 && i < msg_length)
 		{
 			r = Encode(numarr[i], ptarr[pt_counter], r.remain, r.index);
 			//std::cout << "remain " << r.remain << std::endl;

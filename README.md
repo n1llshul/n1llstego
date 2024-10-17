@@ -5,8 +5,11 @@ The method of replacing visually identical characters involves replacing (bit 1)
 **REQUIREMENTS**:
 
 It's very important that both the plaintext and the message must contain only latin letters. 
+
 Even 1 cyrillic letter in plaintext can ruin all the algorithm. 
+
 If cyrillic symbols occur in the message file it won't ruin all the program but it can't be decoded after. Example: msg.txt "what if i include just some слово in cyrillic?" outputs "what if i include just some ╤Б╨╗╨╛╨▓╨╛ in cyrillic?"
+
 
 **PROGRAM USAGE**:
 
